@@ -6,7 +6,7 @@ export interface ConversationMemory {
   stack: ConversationStop[];
   madeChoiceIds: Record<string, boolean>;
   addToStack: (nextStop: ConversationDestination) => any;
-  handleNavigation: (newPage: React.ReactChild) => any;
+  handleNavigation: (newPage: React.ReactNode) => any;
 }
 
 const useConversationMemory = (firstStop?: ConversationStop): ConversationMemory => {
@@ -16,7 +16,7 @@ const useConversationMemory = (firstStop?: ConversationStop): ConversationMemory
 
   const [madeChoiceIds, setMadeChoiceIds] = useState<Record<string, boolean>>({});
 
-  const handleNavigation = useCallback((newPage: React.ReactChild) => {
+  const handleNavigation = useCallback((newPage: React.ReactNode) => {
     setPageStack((stack) => stack.concat([{ page: newPage }]));
   }, []);
 

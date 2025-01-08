@@ -147,10 +147,10 @@ const normcorePrompts: ConversationDestination[] = [
   }
 ];
 
-const usePromptCalculator = (
+export default function usePromptCalculator(
   pastChoices: Record<string, boolean>,
   stack: ConversationStop[]
-): ConversationDestination[] => {
+): ConversationDestination[] {
   const { pathname } = useRouter();
 
   const pickOneFrom = useCallback(
@@ -211,6 +211,4 @@ const usePromptCalculator = (
   }
 
   return [...centerPrompts, exitPrompt];
-};
-
-export default usePromptCalculator;
+}

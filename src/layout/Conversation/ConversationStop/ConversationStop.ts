@@ -1,4 +1,4 @@
-import { ReactChild } from "react";
+import { ReactNode } from "react";
 import { ConversationDestination } from "../ConversationPrompt";
 
 export default interface ConversationStop {
@@ -6,5 +6,5 @@ export default interface ConversationStop {
 
   prompt?: string;
   response?: string;
-  page?: ReactChild;
+  page?: ReactNode;
 }

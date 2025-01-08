@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNodeArray, useCallback, useEffect, useState } from "react";
+import React, { ReactElement, useCallback, useEffect, useState } from "react";
 import ResponsiveLogo from "../../contents/ResponsiveLogo";
 import WelcomeIntro from "../../contents/WelcomeIntro";
 import ZackHeadTags from "../ZackHeadTags";
@@ -23,14 +23,13 @@ const Conversation = ({ path, contents: baseContents }: Props) => {
   if (baseContents.type === React.Fragment) {
     const { children } = baseContents.props as React.PropsWithChildren<unknown>;
     if (Array.isArray(children)) {
-      const childArray = children as ReactNodeArray;
-      const headTagResult: ReactElement = childArray.find(
+      const headTagResult: ReactElement = children.find(
         (n) => React.isValidElement(n) && n.type === ZackHeadTags
       ) as ReactElement;
       if (headTagResult) {
         foundHeadTags = headTagResult;
         setHeadTags(headTagResult);
-        contents = <>{childArray.filter((n) => n !== headTagResult)}</>;
+        contents = <>{children.filter((n) => n !== headTagResult)}</>;
       }
     }
   }
@@ -52,7 +51,7 @@ const Conversation = ({ path, contents: baseContents }: Props) => {
   }, [path, lastLoggedPath, contents, contentsAreEmptyFragment, convo]);
 
   const getBlock = useCallback(
-    (ind: number): React.ReactChild => {
+    (ind: number): React.ReactNode => {
       const stackInd = ind - 2;
 
       if (ind === 0) {
